@@ -5,10 +5,7 @@ CREATE TABLE USERS (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     NOME VARCHAR(100) NOT NULL,
     PESSOA_FISICA_JURIDICA INT NOT NULL, -- 0 para pessoa física, 1 para pessoa jurídica
-    CONTRATADO_CONTRATANTE INT NOT NULL, -- 0 para contratado, 1 para contratante
-    CNPJ VARCHAR(20) NULL UNIQUE, -- UNIQUE para garantir que não haja duplicidade de CNPJ
-    NOME_FANTASIA VARCHAR(100) NULL,
-    CPF VARCHAR(20) NULL UNIQUE, -- UNIQUE para garantir que não haja duplicidade de CPF
+    CPF_CNPJ VARCHAR(20) NOT NULL UNIQUE, -- UNIQUE para garantir que não haja duplicidade de CNPJ
     TELEFONE VARCHAR(20) NOT NULL,
     EMAIL VARCHAR(100) NOT NULL,
     PASSWORD VARCHAR(255) NOT NULL

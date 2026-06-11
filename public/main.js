@@ -1,50 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {    
-    const card = document.getElementById('authCard');
-    const body = document.documentElement;
+$(document).ready(function() {
 
-    // 1. Fixed Create Account Toggle
-    function toggleAuth() {
-        card.classList.toggle('is-flipped');
+    // Função que ajusta o campo CPF/CNPJ
+    function ajustarMaskCPFCNPJ() {
+        if ($('#PESSOA_FISICA_JURIDICA').val() === '0') {
+            $('#CPF_CNPJ').attr('placeholder', '000.000.000-00');
+            //$('#CPF_CNPJ').mask('000.000.000-00');
+        } else if ($('#PESSOA_FISICA_JURIDICA').val() === '1') {
+            $('#CPF_CNPJ').attr('placeholder', '00.000.000/0001-00');
+            //$('#CPF_CNPJ').mask('00.000.000/0000-00');
+        } else {
+            // Caso esteja na opção "Selecione..."
+            $('#CPF_CNPJ').attr('placeholder', 'Selecione o tipo de pessoa primeiro');
+            $('#CPF_CNPJ').attr('maxlength', '0'); 
+        }
     }
+    ajustarMaskCPFCNPJ();
 
-    // 2. Theme Toggle Engine
-    function toggleTheme() {
-        const isDark = body.getAttribute('data-theme') === 'dark';
-        const newTheme = isDark ? 'light' : 'dark';
-        body.setAttribute('data-theme', newTheme);
-        document.getElementById('themeBtn').innerText = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
-    }
-
-    // 3. Form Handling Logic
-    /* function handleAction(event, type) {
-        event.preventDefault();
-        const btn = event.target.querySelector('button');
-        const originalText = btn.innerText;
-        
-        btn.innerText = "Processing...";
-        btn.style.opacity = "0.6";
-
-        setTimeout(() => {
-            alert(`${type} Successful! Welcome to the platform.`);
-            btn.innerText = originalText;
-            btn.style.opacity = "1";
-        }, 1000);
-    } */
-
-    // 4. Apple Pro 3D Tilt Logic
-    document.addEventListener('mousemove', (e) => {
-        if (window.innerWidth < 768) return;
-        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-        
-        const currentRotation = card.classList.contains('is-flipped') ? 180 : 0;
-        card.style.transform = `rotateY(${currentRotation + xAxis}deg) rotateX(${yAxis}deg)`;
+    $('#PESSOA_FISICA_JURIDICA').change(function() {
+        $('#CPF_CNPJ').val(''); 
+        ajustarMaskCPFCNPJ();
     });
-
-    // Reset Tilt
-    document.addEventListener('mouseleave', () => {
-        const currentRotation = card.classList.contains('is-flipped') ? 180 : 0;
-        card.style.transform = `rotateY(${currentRotation}deg) rotateX(0deg)`;
-    });
-     
 });
