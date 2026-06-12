@@ -59,41 +59,42 @@
 
             </div>
         </div>
-    <script>
-        jQuery(document).ready(function($) {
- 
-            $('#formCreate').on('submit', function(e) {
-                e.preventDefault(); // Impede o recarregamento padrão da página
+        <script>
+            jQuery(document).ready(function($) {
+    
+                $('#formCreate').on('submit', function(e) {
+                    e.preventDefault(); // Impede o recarregamento padrão da página
 
-                // Transforma todos os inputs do formulário em uma string de dados
-                let dadosFormulario = $(this).serialize();
+                    // Transforma todos os inputs do formulário em uma string de dados
+                    let dadosFormulario = $(this).serialize();
 
-                $.ajax({
-                    url: '../rotas.php', // Envia os dados para o arquivo que gerencia as ações
-                    type: 'POST',
-                    data: dadosFormulario,
-                    dataType: 'json', // Espera uma resposta estruturada do PHP
-                    success: function(resposta) {
-                        if(resposta.status === 'sucesso') {
-                            alert(resposta.mensagem);
-                        } else {
-                            alert('Erro: ' + resposta.mensagem);
-                        }
-                    },
-                    error: function(xhr, status, error) {
+                    $.ajax({
+                        url: '../rotas.php', // Envia os dados para o arquivo que gerencia as ações
+                        type: 'POST',
+                        data: dadosFormulario,
+                        dataType: 'json', // Espera uma resposta estruturada do PHP
+                        success: function(resposta) {
+                            if(resposta.status === 'sucesso') {
+                                alert(resposta.mensagem);
+                                window.location.href = '../index.php';
+                            } else {
+                                alert('Erro: ' + resposta.mensagem);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            
+                            alert('Erro de comunicação com o servidor.');
                         
-                        alert('Erro de comunicação com o servidor.');
-                    
-                        console.log("Status do Erro:", xhr.status);         
-                        console.log("Texto do Status:", status);            
-                        console.log("Erro Lançado:", error);                
-                        console.log("Resposta do Servidor:", xhr.responseText);
-                    }
+                            console.log("Status do Erro:", xhr.status);         
+                            console.log("Texto do Status:", status);            
+                            console.log("Erro Lançado:", error);                
+                            console.log("Resposta do Servidor:", xhr.responseText);
+                        }
+                    });
                 });
+
             });
 
-        });
-
-    </script>
+        </script>
     </body>
 </html>

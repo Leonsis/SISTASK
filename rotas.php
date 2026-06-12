@@ -4,9 +4,14 @@ require_once __DIR__ . '/app/controllers/loginController.php';
 
 $controller = new loginController();
 
-$acao = isset($_POST['TIPO_FORM']);
+$acao = isset($_POST['TIPO_FORM']) ? $_POST['TIPO_FORM'] : ' ';
 
 switch ($acao) {
+
+    case '0':
+        $controller->loginAction($_POST);
+        break;
+    
     case '1':
         $controller->criarLoginAction($_POST);
         break;

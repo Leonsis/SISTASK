@@ -1,23 +1,23 @@
 $(document).ready(function() {
 
     // Função que ajusta o campo CPF/CNPJ
-    function ajustarMaskCPFCNPJ() {
-        if ($('#PESSOA_FISICA_JURIDICA').val() === '0') {
-            $('#CPF_CNPJ').attr('placeholder', '000.000.000-00');
-            //$('#CPF_CNPJ').mask('000.000.000-00');
-        } else if ($('#PESSOA_FISICA_JURIDICA').val() === '1') {
-            $('#CPF_CNPJ').attr('placeholder', '00.000.000/0001-00');
-            //$('#CPF_CNPJ').mask('00.000.000/0000-00');
-        } else {
-            // Caso esteja na opção "Selecione..."
-            $('#CPF_CNPJ').attr('placeholder', 'Selecione o tipo de pessoa primeiro');
-            $('#CPF_CNPJ').attr('maxlength', '0'); 
+    var opcoesCpfCnpj = {
+        onKeyPress: function(val, e, field, options) {
+            // Remove toda a formatação para contar apenas os números puros
+            var numeros = val.replace(/\D/g, '');
+            
+            // Se digitou mais de 11 números, muda para CNPJ. Senão, mantém CPF.
+            // O '##' no final do CPF permite que o usuário digite o 12º número para disparar a troca
+            var novaMascara = (numeros.length > 11) ? '00.000.000/0000-00' : '000.000.000-00##';
+            
+            // 3. Aplica a nova máscara dinamicamente
+            $('#CPF_CNPJ').mask(novaMascara, options);
         }
-    }
-    ajustarMaskCPFCNPJ();
+    };
 
-    $('#PESSOA_FISICA_JURIDICA').change(function() {
-        $('#CPF_CNPJ').val(''); 
-        ajustarMaskCPFCNPJ();
-    });
+    // Inicializa o campo aceitando até 14 números puros (padrão inicial CPF)
+    $('#CPF_CNPJ').mask('000.000.000-00##', opcoesCpfCnpj);
+    
+    // Mascara do Telefone
+    $('#TELEFONE').mask('(00) 00000-0000');
 });
