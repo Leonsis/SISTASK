@@ -15,11 +15,11 @@
                 <div class="nav-logo">
                     <h2>SISTASKS</h2>
                 </div>
-                <!-- <ul class="nav-menu">
-                    <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
-                </ul> -->
+                <ul class="nav-menu">
+                    <li class="nav-item"><button class="btn btn-sm btn-primary">Sair</button></li>
+                    <!-- <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li> -->
+                </ul>
             </div>
         </nav>
 
