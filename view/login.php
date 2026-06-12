@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro SISTASKS</title>
+    <title>SISTASKS Login</title>
+    
     <link rel="stylesheet" href="../public/styles.css">
     <script src="../public/jQuery.js"></script>
     <script src="../public/jquery.mask.min.js"></script>
@@ -15,32 +16,26 @@
             <div class="nav-logo">
                 <h2>SISTASKS</h2>
             </div>
+            <!-- <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
+            </ul> -->
         </div>
     </nav>
 
     <section class="cursos" style="padding: 140px 0 80px 0;">
         <div class="container">
-            <h2 class="section-title">Criar uma conta</h2>
+            <h2 class="section-title">Acesse sua conta</h2>
             <div class="cursos-grid">
-                <div class="curso-item" style="max-width: 520px; margin: 0 auto;">
+                <div class="curso-item" style="max-width: 460px; margin: 0 auto;">
                     <div class="curso-header">
-                        <h3>Cadastro</h3>
+                        <h3>Login</h3>
                         <span class="curso-badge">SISTASKS</span>
                     </div>
-                    <p>Cadastre-se para acessar o painel de gestão e controle de chamados.</p>
-                    <form id="formCreate">
-                        <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="1">
-                        <div class="input-box">
-                            <label for="NOME">Nome completo</label>
-                            <input name="NOME" id="NOME" type="text" placeholder="John Doe" required>
-                        </div>
-                        <div class="input-box">
-                            <label for="PESSOA_FISICA_JURIDICA">Tipo de pessoa</label>
-                            <select name="PESSOA_FISICA_JURIDICA" id="PESSOA_FISICA_JURIDICA" required>
-                                <option value="0">Pessoa física</option>
-                                <option value="1">Pessoa jurídica</option>
-                            </select>
-                        </div>
+                    <p>Entrar no painel de gestão de demandas e chamados.</p>
+                    <form id="formLogin">
+                        <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="0">
                         <div class="input-box">
                             <label for="CPF_CNPJ">CPF/CNPJ</label>
                             <input id="CPF_CNPJ" name="CPF_CNPJ" type="text" placeholder="000.000.000-00" required>
@@ -49,17 +44,13 @@
                             <label for="PASSWORD">Senha</label>
                             <input type="password" name="PASSWORD" id="PASSWORD" placeholder="••••••••" required>
                         </div>
-                        <div class="input-box">
-                            <label for="TELEFONE">Telefone</label>
-                            <input type="text" id="TELEFONE" name="TELEFONE" placeholder="(61) 9999-9999" required>
-                        </div>
-                        <div class="input-box">
-                            <label for="EMAIL">Email</label>
-                            <input type="email" id="EMAIL" name="EMAIL" placeholder="seu@email.com" required>
-                        </div>
-                        <button style="border: 0px;" type="submit" class="curso-badge">Criar conta</button>
+                        <button style="border: 0px;" type="submit" class="curso-badge">Entrar</button>
                     </form>
-                    <p class="toggle-link">Já tem conta? <a href="login.php">Entrar</a></p>
+                    <!-- <div class="curso-footer">
+                        <span class="curso-platform">Painel</span>
+                        <span class="curso-date">2026</span>
+                    </div> -->
+                    <p class="toggle-link">Não tem conta? <a href="criarConta.php">Criar conta</a></p>
                 </div>
             </div>
         </div>
@@ -67,7 +58,7 @@
 
     <script>
         jQuery(document).ready(function($) {
-            $('#formCreate').on('submit', function(e) {
+            $('#formLogin').on('submit', function(e) {
                 e.preventDefault();
 
                 let dadosFormulario = $(this).serialize();
@@ -79,8 +70,7 @@
                     dataType: 'json',
                     success: function(resposta) {
                         if (resposta.status === 'sucesso') {
-                            alert(resposta.mensagem);
-                            window.location.href = '../login.php';
+                            window.location.href = '../view/painel.php';
                         } else {
                             alert('Erro: ' + resposta.mensagem);
                         }

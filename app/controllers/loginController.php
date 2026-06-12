@@ -14,7 +14,22 @@ class loginController {
     public function criarLoginAction($pDados) {
         
         try {
-            
+            // Verifica se já foi registrado uma conta com o CPF/CNPJ
+            $sql = "SELECT * FROM USERS WHERE CPF_CNPJ = :CPF_CNPJ";
+
+            $stmt = $this->pdo->prepare($sql);
+
+            $stmt->execute([
+                ':CPF_CNPJ' => $pDados['CPF_CNPJ']
+            ]);
+
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($usuario) {
+                echo json_encode(['status' => 'sucesso', 'mensagem' => 'Dados salvos com sucesso!']);
+                exit;
+            }
+
             $sql = "INSERT INTO USERS (NOME, PESSOA_FISICA_JURIDICA, CPF_CNPJ, PASSWORD, TELEFONE, EMAIL) 
                     VALUES (:NOME, :PESSOA_FISICA_JURIDICA, :CPF_CNPJ, :PASSWORD, :TELEFONE, :EMAIL)";
             $stmt = $this->pdo->prepare($sql);
