@@ -1066,3 +1066,15 @@ select {
     color: #fff;
     font-size: 0.95rem;
 }
+
+.demandas td {
+    padding: 5px;
+}
+
+table .dm {width: 30%}
+table .em {width: 50%}
+table .ac {width: 50%}
+
+table th.dm {width: 30%; text-align: justify;}
+table th.em {width: 50%; text-align: justify;}
+table th.ac {width: 50%;}

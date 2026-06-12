@@ -16,7 +16,6 @@ class loginController {
         try {
             // Verifica se já foi registrado uma conta com o CPF/CNPJ
             $sql = "SELECT * FROM USERS WHERE CPF_CNPJ = :CPF_CNPJ";
-
             $stmt = $this->pdo->prepare($sql);
 
             $stmt->execute([
@@ -26,17 +25,16 @@ class loginController {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($usuario) {
-                echo json_encode(['status' => 'sucesso', 'mensagem' => 'Dados salvos com sucesso!']);
+                echo json_encode(['status' => 'erro', 'mensagem' => 'CPF/CNPJ já cadastrado']);
                 exit;
             }
 
-            $sql = "INSERT INTO USERS (NOME, PESSOA_FISICA_JURIDICA, CPF_CNPJ, PASSWORD, TELEFONE, EMAIL) 
+            $sql2 = "INSERT INTO USERS (NOME, PESSOA_FISICA_JURIDICA, CPF_CNPJ, PASSWORD, TELEFONE, EMAIL) 
                     VALUES (:NOME, :PESSOA_FISICA_JURIDICA, :CPF_CNPJ, :PASSWORD, :TELEFONE, :EMAIL)";
-            $stmt = $this->pdo->prepare($sql);
+            $stmt = $this->pdo->prepare($sql2);
             
             // Gera o hash da senha
             $hash = password_hash($pDados['PASSWORD'], PASSWORD_DEFAULT); 
-
             $dados = [
                 ':NOME'                    => $pDados['NOME'],
                 ':PESSOA_FISICA_JURIDICA'  => $pDados['PESSOA_FISICA_JURIDICA'],

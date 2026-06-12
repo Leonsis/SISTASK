@@ -80,7 +80,7 @@
                     success: function(resposta) {
                         if (resposta.status === 'sucesso') {
                             alert(resposta.mensagem);
-                            window.location.href = '../login.php';
+                            window.location.href = 'login.php';
                         } else {
                             alert('Erro: ' + resposta.mensagem);
                         }
