@@ -20,50 +20,35 @@
 
     <section class="cursos" style="padding: 140px 0 80px 0;">
         <div class="container">
-            <h2 class="section-title">Criar uma conta</h2>
+            <h2 class="section-title">Cadastrar Empresa</h2>
             <div class="cursos-grid">
                 <div class="curso-item" style="max-width: 520px; margin: 0 auto;">
                     <div class="curso-header">
-                        <h3>Cadastro</h3>
+                        <h3>Cadastro da empresa</h3>
                         <span class="curso-badge">SISTASKS</span>
                     </div>
-                    <p>Cadastre-se para acessar o painel de gestão e controle de chamados.</p>
-                    <form id="formCreate">
-                        <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="1">
+                    <p>Cadastre a sua empresa no sistema e tenha cotrole nas suas demandas</p>
+                    <form id="formCadastraEmp">
+                        <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="2">                        
                         <div class="input-box">
-                            <label for="NOME">Nome completo</label>
-                            <input name="NOME" id="NOME" type="text" placeholder="John Doe" required>
+                            <label for="CNPJ">CNPJ</label>
+                            <input id="CNPJ" name="CNPJ" type="text" placeholder="00.000.000/0000-00" required>
                         </div>
                         <div class="input-box">
-                            <label for="PESSOA_FISICA_JURIDICA">Tipo de pessoa</label>
-                            <select name="PESSOA_FISICA_JURIDICA" id="PESSOA_FISICA_JURIDICA" required>
-                                <?php foreach ($empresas as $empresa): ?>
-                                    <option value="<?= $empresa['ID'] ?>">
-                                        <?= htmlspecialchars($empresa['NOME_FANTASIA']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                            <p class="toggle-link" style="margin: 0px; !important">Sua empresa está <a href="cadastrarEmpresa.php">cadastrada</a>?</p>
+                            <label for="RAZAO_SOCIAL">Razão social</label>
+                            <input type="text" name="RAZAO_SOCIAL" id="RAZAO_SOCIAL" required>
                         </div>
                         <div class="input-box">
-                            <label for="CPF">CPF</label>
-                            <input id="CPF" name="CPF" type="text" placeholder="000.000.000-00" required>
+                            <label for="NOME_FANTASIA">Razão social</label>
+                            <input type="text" name="NOME_FANTASIA" id="NOME_FANTASIA" required>
                         </div>
                         <div class="input-box">
-                            <label for="PASSWORD">Senha</label>
-                            <input type="password" name="PASSWORD" id="PASSWORD" placeholder="••••••••" required>
-                        </div>
-                        <div class="input-box">
-                            <label for="TELEFONE">Telefone</label>
-                            <input type="text" id="TELEFONE" name="TELEFONE" placeholder="(61) 9999-9999" required>
-                        </div>
-                        <div class="input-box">
-                            <label for="EMAIL">Email</label>
-                            <input type="email" id="EMAIL" name="EMAIL" placeholder="seu@email.com" required>
+                            <label for="DATA_ABERTURA">Data de Abertura</label>
+                            <input type="date" id="DATA_ABERTURA" name="DATA_ABERTURA" required>
                         </div>
                         <button style="border: 0px;" type="submit" class="curso-badge">Criar conta</button>
                     </form>
-                    <p class="toggle-link">Já tem conta? <a href="login.php">Entrar</a></p>
+                    <p class="toggle-link">Empresa já cadastrada? <a href="criarConta.php">Voltar</a></p>
                 </div>
             </div>
         </div>
@@ -71,12 +56,11 @@
 
     <script>
         $(document).ready(function() {
-            $('#CPF').mask('000.000.000-00');
-            $('#TELEFONE').mask('(00) 00000-0000');
+            $('#CNPJ').mask('00.000.000/0000-00');
         });
 
         jQuery(document).ready(function($) {
-            $('#formCreate').on('submit', function(e) {
+            $('#formCadastraEmp').on('submit', function(e) {
                 e.preventDefault();
 
                 let dadosFormulario = $(this).serialize();
@@ -89,7 +73,7 @@
                     success: function(resposta) {
                         if (resposta.status === 'sucesso') {
                             alert(resposta.mensagem);
-                            window.location.href = 'login.php';
+                            window.location.href = 'cadastrarEmpresa.php';
                         } else {
                             alert('Erro: ' + resposta.mensagem);
                         }

@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../conexao/Conexao.php';
+require_once __DIR__ . '/../Core/Controller.php';
 
-class loginController {
+class loginController extends Controller {
 
     private $pdo;
 
@@ -10,6 +11,31 @@ class loginController {
         $this->pdo = $pdo;
     }
 
+    public function login()
+    {
+        $this->view('login');
+    }
+
+    public function criarConta()
+    {
+        $empresas = [];
+
+        $this->view('criarConta', [
+            'empresas' => $empresas
+        ]);
+    }
+
+/*     public function criarContaAcntion()
+    {
+        $sql = "SELECT ID, NOME_FANTASIA FROM EMPRESA";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        $empresas = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+        require BASE_PATH . '/view/criarConta.php';
+    } */
+    
     /* lógica de criar login */
     public function criarLoginAction($pDados) {
         

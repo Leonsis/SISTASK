@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SISTASKS Login</title>
-        <link rel="stylesheet" href="../public/styles.css">
-        <script src="../public/jQuery.js"></script>
-        <script src="../public/jquery.mask.min.js"></script>
-        <script src="../public/script.js"></script>
+        <link rel="stylesheet" href="/SisTasks/public/styles.css">
+        <script src="/SisTasks/public/jQuery.js"></script>
+        <script src="/SisTasks/public/jquery.mask.min.js"></script>
+        <script src="/SisTasks/public/script.js"></script>
     </head>
     <body>
         <nav class="navbar">
@@ -16,9 +16,7 @@
                     <h2>SISTASKS</h2>
                 </div>
                 <ul class="nav-menu">
-                    <li class="nav-item"><button class="btn btn-sm btn-primary">Sair</button></li>
-                    <!-- <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li> -->
+                    <li class="nav-item"><button class="btn btn-sm btn-primary">Sair</button></li>                    
                 </ul>
             </div>
         </nav>

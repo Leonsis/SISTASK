@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISTASKS Login</title>
     
-    <link rel="stylesheet" href="../public/styles.css">
-    <script src="../public/jQuery.js"></script>
-    <script src="../public/jquery.mask.min.js"></script>
-    <script src="../public/script.js"></script>
+    <link rel="stylesheet" href="/SisTasks/public/styles.css">
+    <script src="/SisTasks/public/jQuery.js"></script>
+    <script src="/SisTasks/public/jquery.mask.min.js"></script>
+    <script src="/SisTasks/public/script.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -46,11 +46,7 @@
                         </div>
                         <button style="border: 0px;" type="submit" class="curso-badge">Entrar</button>
                     </form>
-                    <!-- <div class="curso-footer">
-                        <span class="curso-platform">Painel</span>
-                        <span class="curso-date">2026</span>
-                    </div> -->
-                    <p class="toggle-link">Não tem conta? <a href="criarConta.php">Criar conta</a></p>
+                    <p class="toggle-link">Não tem conta? <a href="rotas.php?pagina=criarConta">Criar conta</a></p>                    
                 </div>
             </div>
         </div>

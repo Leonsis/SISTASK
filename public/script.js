@@ -139,7 +139,7 @@ $(document).ready(function () {
         });
 
     // Função que ajusta o campo CPF/CNPJ
-    var opcoesCpfCnpj = {
+    /* var opcoesCpfCnpj = {
         onKeyPress: function(val, e, field, options) {
             // Remove toda a formatação para contar apenas os números puros
             var numeros = val.replace(/\D/g, '');
@@ -155,10 +155,8 @@ $(document).ready(function () {
 
     // Inicializa o campo aceitando até 14 números puros (padrão inicial CPF)
     $('#CPF_CNPJ').mask('000.000.000-00##', opcoesCpfCnpj);
+    $('#CPF_CNPJ').mask('000.000.000-00##', opcoesCpfCnpj);
     
-    // Mascara do Telefone
-    $('#TELEFONE').mask('(00) 00000-0000');
-
     $('#CPF_CNPJ').blur(function() {
         if ($(this).val().length <= 14) {
             $('#PESSOA_FISICA_JURIDICA').val('0');
@@ -166,5 +164,5 @@ $(document).ready(function () {
         else {
             $('#PESSOA_FISICA_JURIDICA').val('1');
         }
-    });
+    }); */   
 });
