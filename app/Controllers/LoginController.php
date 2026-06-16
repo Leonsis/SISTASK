@@ -11,12 +11,12 @@ class loginController extends Controller {
         $this->pdo = $pdo;
     }
 
-    public function login()
+    public function viewLogin()
     {
         $this->view('login');
     }
 
-    public function criarConta()
+    public function viewCriarConta()
     {
         $empresas = [];
 

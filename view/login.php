@@ -46,7 +46,7 @@
                         </div>
                         <button style="border: 0px;" type="submit" class="curso-badge">Entrar</button>
                     </form>
-                    <p class="toggle-link">Não tem conta? <a href="rotas.php?pagina=criarConta">Criar conta</a></p>                    
+                    <p class="toggle-link">Não tem conta? <a href="<?= url('/criar-conta') ?>">Criar conta</a></p>                    
                 </div>
             </div>
         </div>

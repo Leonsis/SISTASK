@@ -1,11 +1,12 @@
 <?php
-$host = 'localhost'; // ou o IP do seu servidor
+$host = '192.168.0.199'; // ou o IP do seu servidor/computador
+$port = '3306';
 $dbname = 'SisTasks';
-$username = 'root';
-$password = 'root';
+$username = 'caio';
+$password = '22060122';
 
 try {
-    $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
     $pdo = new PDO($dsn, $username, $password);
     
     // Configura o PDO para lançar exceções em caso de erros

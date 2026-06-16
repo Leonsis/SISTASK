@@ -2,13 +2,24 @@
 
 return [
     '/' => [
-        'controller' => 'loginController',
-        'method' => 'login'
+        'controller' => 'LoginController',
+        'method' => 'viewLogin'
     ],
 
     '/criar-conta' => [
-        'controller' => 'loginController',
-        'method' => 'criarConta'
+        'controller' => 'LoginController',
+        'method' => 'viewCriarConta'
     ],
+
+    '/cadastro-empresa' => [
+        'controller' => 'EmpresaController',
+        'method' => 'viewCadastroEmp'
+    ],
+
+    '/cadastrar-empresa-action' => [
+        'controller' => 'EmpresaController',
+        'method' => 'cadastrarEmpresaAction'
+    ],
+
 
 ];

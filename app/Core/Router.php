@@ -8,8 +8,8 @@ class Router
         $routes = require '../routes.php';
 
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-        $uri = str_replace('/SisTasks/public', '', $uri);
+        
+        $uri = str_replace('/SisTasks/public', '', $uri); // Modifique de acordo com o nome da aplicação
 
         if (!isset($routes[$uri])) {
             http_response_code(404);
@@ -18,8 +18,8 @@ class Router
 
         $controllerName = $routes[$uri]['controller'];
         $method = $routes[$uri]['method'];
-
-        require "../app/Controllers/$controllerName.php";
+        
+        require __DIR__ . "/../Controllers/$controllerName.php";
 
         $controller = new $controllerName();
 

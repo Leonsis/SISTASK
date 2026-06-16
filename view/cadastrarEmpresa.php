@@ -39,7 +39,7 @@
                             <input type="text" name="RAZAO_SOCIAL" id="RAZAO_SOCIAL" required>
                         </div>
                         <div class="input-box">
-                            <label for="NOME_FANTASIA">Razão social</label>
+                            <label for="NOME_FANTASIA">Nome Fantasia</label>
                             <input type="text" name="NOME_FANTASIA" id="NOME_FANTASIA" required>
                         </div>
                         <div class="input-box">
@@ -66,7 +66,7 @@
                 let dadosFormulario = $(this).serialize();
 
                 $.ajax({
-                    url: '../rotas.php',
+                    url: <?= url('/cadastrar-empresa-action') ?>,
                     type: 'POST',
                     data: dadosFormulario,
                     dataType: 'json',

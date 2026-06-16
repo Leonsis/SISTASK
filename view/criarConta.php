@@ -43,7 +43,7 @@
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <p class="toggle-link" style="margin: 0px; !important">Sua empresa está <a href="cadastrarEmpresa.php">cadastrada</a>?</p>
+                            <p class="toggle-link" style="margin: 0px; !important">Sua empresa está <a href="<?= url('/cadastro-empresa')?>">cadastrada</a>?</p>
                         </div>
                         <div class="input-box">
                             <label for="CPF">CPF</label>
@@ -63,7 +63,7 @@
                         </div>
                         <button style="border: 0px;" type="submit" class="curso-badge">Criar conta</button>
                     </form>
-                    <p class="toggle-link">Já tem conta? <a href="login.php">Entrar</a></p>
+                    <p class="toggle-link">Já tem conta? <a href="<?= url('/') ?>">Entrar</a></p>
                 </div>
             </div>
         </div>

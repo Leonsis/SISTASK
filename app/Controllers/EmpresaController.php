@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../conexao/Conexao.php';
+require_once __DIR__ . '/../Core/Controller.php';
 
-class empresaController {
+class empresaController extends Controller{
 
     private $pdo;
 
@@ -10,9 +11,15 @@ class empresaController {
         $this->pdo = $pdo;
     }
 
+    public function viewCadastroEmp()
+    {
+        $this->view('cadastrarEmpresa');
+    }
+
     /* lógica de cadastro da empresa */
-    public function cadastrarEmpresa($pDados) {
-        
+    public function cadastrarEmpresaAction() {
+        $pDados = isset($_POST) ? $_POST : [];
+        var_dump($pDados);die();
         try {
             // Verifica se já foi registrado uma conta com o CPF/CNPJ
             $sql = "SELECT * FROM EMPRESA WHERE CNPJ = :CNPJ";
