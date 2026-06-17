@@ -10,6 +10,16 @@ return [
         'controller' => 'LoginController',
         'method' => 'viewCriarConta'
     ],
+    
+    '/criar-login-action' => [
+        'controller' => 'LoginController',
+        'method' => 'criarLoginAction'
+    ],
+
+    '/login-action' => [
+        'controller' => 'LoginController',
+        'method' => 'loginAction'
+    ],
 
     '/cadastro-empresa' => [
         'controller' => 'EmpresaController',
@@ -21,5 +31,9 @@ return [
         'method' => 'cadastrarEmpresaAction'
     ],
 
+    '/painel' => [
+        'controller' => 'PainelController',
+        'method' => 'viewPainel'
+    ],
 
 ];

@@ -28,7 +28,7 @@
                         <span class="curso-badge">SISTASKS</span>
                     </div>
                     <p>Cadastre a sua empresa no sistema e tenha cotrole nas suas demandas</p>
-                    <form id="formCadastraEmp">
+                    <form id="formCadastraEmp" method="POST">
                         <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="2">                        
                         <div class="input-box">
                             <label for="CNPJ">CNPJ</label>
@@ -48,7 +48,7 @@
                         </div>
                         <button style="border: 0px;" type="submit" class="curso-badge">Criar conta</button>
                     </form>
-                    <p class="toggle-link">Empresa já cadastrada? <a href="criarConta.php">Voltar</a></p>
+                    <p class="toggle-link">Empresa já cadastrada? <a href="<?= url('/criar-conta') ?>">Voltar</a></p>
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#CNPJ').mask('00.000.000/0000-00');
+            $('#CNPJ').mask('**.***.***/****-**');
         });
 
         jQuery(document).ready(function($) {
@@ -66,16 +66,17 @@
                 let dadosFormulario = $(this).serialize();
 
                 $.ajax({
-                    url: <?= url('/cadastrar-empresa-action') ?>,
+                    url: '<?= url('/cadastrar-empresa-action') ?>',
                     type: 'POST',
                     data: dadosFormulario,
                     dataType: 'json',
                     success: function(resposta) {
                         if (resposta.status === 'sucesso') {
                             alert(resposta.mensagem);
-                            window.location.href = 'cadastrarEmpresa.php';
+                            window.location.href = '<?= url('/criar-conta') ?>';
                         } else {
                             alert('Erro: ' + resposta.mensagem);
+                            window.location.href = '<?= url('/criar-conta') ?>';
                         }
                     },
                     error: function(xhr, status, error) {

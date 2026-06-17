@@ -86,9 +86,7 @@ $(document).ready(function () {
             $(this).css('transform', 'translateY(0) scale(1)');
         });
 
-    /* ===============================
-       Back to top button
-    =============================== */
+    /* Logica para criar um botton que faz subir a pagina
     const $backToTop = $('<button/>', {
         class: 'back-to-top',
         html: '<i class="fas fa-arrow-up"></i>'
@@ -136,7 +134,7 @@ $(document).ready(function () {
                 transform: 'scale(1)',
                 backgroundColor: '#f5b645'
             });
-        });
+        });*/
 
     // Função que ajusta o campo CPF/CNPJ
     /* var opcoesCpfCnpj = {

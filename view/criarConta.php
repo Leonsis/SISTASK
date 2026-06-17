@@ -35,8 +35,8 @@
                             <input name="NOME" id="NOME" type="text" placeholder="John Doe" required>
                         </div>
                         <div class="input-box">
-                            <label for="PESSOA_FISICA_JURIDICA">Tipo de pessoa</label>
-                            <select name="PESSOA_FISICA_JURIDICA" id="PESSOA_FISICA_JURIDICA" required>
+                            <label for="EMPRESA">Tipo de pessoa</label>
+                            <select name="EMPRESA" id="EMPRESA" required>
                                 <?php foreach ($empresas as $empresa): ?>
                                     <option value="<?= $empresa['ID'] ?>">
                                         <?= htmlspecialchars($empresa['NOME_FANTASIA']) ?>
@@ -82,16 +82,17 @@
                 let dadosFormulario = $(this).serialize();
 
                 $.ajax({
-                    url: '../rotas.php',
+                    url: '<?= url('/criar-login-action') ?>',
                     type: 'POST',
                     data: dadosFormulario,
                     dataType: 'json',
                     success: function(resposta) {
                         if (resposta.status === 'sucesso') {
                             alert(resposta.mensagem);
-                            window.location.href = 'login.php';
+                            window.location.href = '<?= url('/') ?>';
                         } else {
                             alert('Erro: ' + resposta.mensagem);
+                            window.location.href = '<?= url('/') ?>';
                         }
                     },
                     error: function(xhr, status, error) {
