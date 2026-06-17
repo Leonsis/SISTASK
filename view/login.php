@@ -64,7 +64,7 @@
                 let dadosFormulario = $(this).serialize();
 
                 $.ajax({
-                    url: '<?= url('/login-action') ?>',
+                    url: '<?= url('/autenticar-Action') ?>',
                     type: 'POST',
                     data: dadosFormulario,
                     dataType: 'json',

@@ -13,6 +13,15 @@ class PainelController extends Controller {
 
     public function viewPainel()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['usuario_logado']) || $_SESSION['usuario_logado'] !== true) {
+            header('Location: ' . url('/'));
+            exit;
+        }
+
         $empresas = [];
 
         $sql = "SELECT ID, NOME_FANTASIA FROM EMPRESA";
@@ -24,6 +33,19 @@ class PainelController extends Controller {
         $this->view('painel', [
             'empresas' => $empresas
         ]);
+    }
+
+    public function logoutAction()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        session_unset();
+        session_destroy();
+
+        header('Location: ' . url('/'));
+        exit;
     }
 
 }

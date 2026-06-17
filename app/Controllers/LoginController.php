@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../Core/Controller.php';
+require_once __DIR__ . '/../Helpers/helpers.php';
 
 class LoginController extends Controller {
 
@@ -80,30 +81,53 @@ class LoginController extends Controller {
         }
     }
 
-    /* lógica de login */
-    public function loginAction() {
+    // Processa a tentativa de login
+    public function autenticarAction() {
         $pDados = isset($_POST) ? $_POST : [];
         
-        try {
-            $pDados['CPF'] = preg_replace('/\D/', '', $pDados['CPF']);
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-            $sql = "SELECT * FROM USERS WHERE CPF = :CPF AND PASSWORD = :PASSWORD";
-            $stmt = $this->pdo->prepare($sql);
+        $cpf = isset($pDados['CPF']) ? trim($pDados['CPF']) : '';
+        $senha   = isset($pDados['PASSWORD']) ? trim($pDados['PASSWORD']) : '';
+
+        if (empty($cpf) || empty($senha)) {
+            $_SESSION['erro_login'] = "Preencha todos os campos.";
+            echo json_encode(['status' => 'erro', 'mensagem' => 'Falha ao logar.']);
+        }
+
+        $sql = "SELECT * FROM USERS WHERE CPF = :CPF LIMIT 1";
+
+        $stmt = $this->pdo->prepare($sql);
+        $pDados['CPF'] = preg_replace('/\D/', '', $pDados['CPF']);
+        $dados = [
+            ':CPF' => $pDados['CPF'],
+        ];
+
+        $stmt->execute($dados);
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($resultado) {
             
-            $dados = [
-                ':CPF' => $pDados['CPF'],
-                ':PASSWORD' => $pDados['PASSWORD'],
-            ];
+            if (password_verify($senha, $resultado['PASSWORD'])) {
+                
+                // Sucesso! Grava os dados do usuário logado na Sessão
+                $_SESSION['usuario_logado'] = true;
+                $_SESSION['usuario_id']     = $resultado['ID'];
+                $_SESSION['usuario_nome']   = $resultado['NOME'];
 
-            if ($stmt->execute($dados)) {
+                // Redireciona para a tela principal (Painel)
                 echo json_encode(['status' => 'sucesso', 'mensagem' => 'Login realizado con sucesso!']);
-            } else {
-                echo json_encode(['status' => 'erro', 'mensagem' => 'Falha ao logar.']);
             }
         } 
-        catch (PDOException $e) {
-            echo json_encode(['status' => 'erro', 'mensagem' => 'Erro ao ao logar: ' . $e->getMessage()]);
+        else {
+            // Se chegou aqui, o usuário ou a senha estão incorretos
+            $_SESSION['erro_login'] = "Usuário ou senha inválidos.";
+            echo json_encode(['status' => 'erro', 'mensagem' => 'Falha ao logar.']);
+            exit;
         }
+        
     }
 
 }
