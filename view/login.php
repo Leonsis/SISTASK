@@ -37,8 +37,8 @@
                     <form id="formLogin">
                         <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="0">
                         <div class="input-box">
-                            <label for="CPF_CNPJ">CPF/CNPJ</label>
-                            <input id="CPF_CNPJ" name="CPF_CNPJ" type="text" placeholder="000.000.000-00" required>
+                            <label for="CPF">CPF/CNPJ</label>
+                            <input id="CPF" name="CPF" type="text" placeholder="000.000.000-00" required>
                         </div>
                         <div class="input-box">
                             <label for="PASSWORD">Senha</label>
@@ -53,6 +53,10 @@
     </section>
 
     <script>
+        $(document).ready(function() {
+            $('#CPF').mask('000.000.000-00');
+        });
+
         jQuery(document).ready(function($) {
             $('#formLogin').on('submit', function(e) {
                 e.preventDefault();
@@ -60,13 +64,13 @@
                 let dadosFormulario = $(this).serialize();
 
                 $.ajax({
-                    url: '../rotas.php',
+                    url: '<?= url('/login-action') ?>',
                     type: 'POST',
                     data: dadosFormulario,
                     dataType: 'json',
                     success: function(resposta) {
                         if (resposta.status === 'sucesso') {
-                            window.location.href = '../view/painel.php';
+                            window.location.href = '<?= url('/painel') ?>';
                         } else {
                             alert('Erro: ' + resposta.mensagem);
                         }

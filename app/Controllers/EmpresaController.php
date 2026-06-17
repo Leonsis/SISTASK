@@ -1,13 +1,13 @@
 <?php
-require_once __DIR__ . '/../conexao/Conexao.php';
 require_once __DIR__ . '/../Core/Controller.php';
 
-class empresaController extends Controller{
+class EmpresaController extends Controller{
 
     private $pdo;
 
     public function __construct() {
-        global $pdo;
+        // global $pdo; Não está funcionando
+        require_once __DIR__ . '/../conexao/Conexao.php';
         $this->pdo = $pdo;
     }
 
@@ -19,8 +19,11 @@ class empresaController extends Controller{
     /* lógica de cadastro da empresa */
     public function cadastrarEmpresaAction() {
         $pDados = isset($_POST) ? $_POST : [];
-        var_dump($pDados);die();
+       
         try {
+
+            $pDados['CNPJ'] = preg_replace('/[^a-zA-Z0-9]/', '', $pDados['CNPJ']);
+            
             // Verifica se já foi registrado uma conta com o CPF/CNPJ
             $sql = "SELECT * FROM EMPRESA WHERE CNPJ = :CNPJ";
             $stmt = $this->pdo->prepare($sql);
