@@ -16,9 +16,9 @@ return [
         'method' => 'criarLoginAction'
     ],
 
-    '/login-action' => [
+    '/autenticar-Action' => [
         'controller' => 'LoginController',
-        'method' => 'loginAction'
+        'method' => 'autenticarAction'
     ],
 
     '/cadastro-empresa' => [
@@ -34,6 +34,11 @@ return [
     '/painel' => [
         'controller' => 'PainelController',
         'method' => 'viewPainel'
+    ],
+
+    '/logout-action' => [
+        'controller' => 'PainelController',
+        'method' => 'logoutAction'
     ],
 
 ];

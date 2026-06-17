@@ -56,7 +56,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#CNPJ').mask('**.***.***/****-**');
+            $('#CNPJ').mask('AA.AAA.AAA/AAAA-AA');
         });
 
         jQuery(document).ready(function($) {

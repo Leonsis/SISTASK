@@ -1,9 +1,12 @@
 <?php
-$host = '192.168.0.199'; // ou o IP do seu servidor/computador
+//$host = '192.168.0.199'; // ou o IP do seu servidor/computador
+$host = 'localhost'; // ou o IP do seu servidor/computador
 $port = '3306';
 $dbname = 'SisTasks';
-$username = 'caio';
-$password = '22060122';
+//$username = 'caio';
+$username = 'root';
+//$password = '22060122';
+$password = 'root';
 
 try {
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";

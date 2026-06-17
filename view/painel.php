@@ -16,7 +16,9 @@
                     <h2>SISTASKS</h2>
                 </div>
                 <ul class="nav-menu">
-                    <li class="nav-item"><button class="btn btn-sm btn-primary">Sair</button></li>                    
+                    <li class="nav-item">
+                        <button id="logoutAction" class="btn btn-sm btn-primary">Sair</button>
+                    </li>                    
                 </ul>
             </div>
         </nav>
@@ -68,5 +70,12 @@
                 
             </div>
         </section>
+        <script>
+            $(document).ready(function() {
+                $('#logoutAction').on('click', function() {
+                    window.location.href = '<?= url('/logout-action')?>';
+                });
+            });
+        </script>
     </body>
 </html>
