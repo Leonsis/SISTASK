@@ -42,7 +42,7 @@ CREATE TABLE TASKS (
     DATA_CRIACAO DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     DATA_INICIO DATETIME NULL,
     DATA_ENTREGA DATETIME NULL,
-    STATUS INT NOT NULL -- 0 - Cancelado | 1 - Não iniciado | 2 - iniciado | 3 - Finalizado
+    STATUS INT NOT NULL DEFAULT 1 -- 0 - Cancelado | 1 - Não iniciado | 2 - iniciado | 3 - Finalizado
 );
 
 /*

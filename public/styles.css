@@ -1057,7 +1057,16 @@ body {
     }
 }
 
-select {
+.form-item {
+    background-color: rgba(245, 182, 69, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(245, 182, 69, 0.2);
+    transition: all 0.3s ease;
+}
+
+select,
+textarea {
     width: 100%;
     padding: 0.95rem 1rem;
     border-radius: 14px;

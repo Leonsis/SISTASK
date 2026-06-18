@@ -28,8 +28,7 @@
                         <span class="curso-badge">SISTASKS</span>
                     </div>
                     <p>Cadastre a sua empresa no sistema e tenha cotrole nas suas demandas</p>
-                    <form id="formCadastraEmp" method="POST">
-                        <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="2">                        
+                    <form id="formCadastraEmp" method="POST">             
                         <div class="input-box">
                             <label for="CNPJ">CNPJ</label>
                             <input id="CNPJ" name="CNPJ" type="text" placeholder="00.000.000/0000-00" required>

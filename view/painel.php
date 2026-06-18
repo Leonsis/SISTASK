@@ -70,6 +70,37 @@
                 
             </div>
         </section>
+
+        <section id="educacao" class="educacao">
+            <div class="container">
+                <h2 class="section-title">Crie a Demanda</h2>
+                <div class="educacao-grid">
+                    <div class="form-item">
+                        <form id="formCreate">
+                            <div class="input-box">
+                                <label for="EMPRESA">Tipo de pessoa</label>
+                                <select name="EMPRESA" id="EMPRESA" required>
+                                    <?php foreach ($empresas as $empresa): ?>
+                                        <option value="<?= $empresa['ID'] ?>">
+                                            <?= htmlspecialchars($empresa['NOME_FANTASIA']) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="input-box">
+                                <label for="TITULO">Titulo do chamdo</label>
+                                <input id="TITULO" name="TITULO" type="text" required>
+                            </div>
+                            <div class="input-box">
+                                <label for="DESCRICAO">Descrição do chamado</label>
+                                <textarea name="DESCRICAO" id="DESCRICAO" rows="5" cols="33" required></textarea>
+                            </div>
+                            <button style="border: 0px;" type="submit" class="curso-badge">Criar Chamado</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
         <script>
             $(document).ready(function() {
                 $('#logoutAction').on('click', function() {

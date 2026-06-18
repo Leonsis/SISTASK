@@ -29,7 +29,6 @@
                     </div>
                     <p>Cadastre-se para acessar o painel de gestão e controle de chamados.</p>
                     <form id="formCreate">
-                        <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="1">
                         <div class="input-box">
                             <label for="NOME">Nome completo</label>
                             <input name="NOME" id="NOME" type="text" placeholder="John Doe" required>

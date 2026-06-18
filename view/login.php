@@ -35,7 +35,6 @@
                     </div>
                     <p>Entrar no painel de gestão de demandas e chamados.</p>
                     <form id="formLogin">
-                        <input type="hidden" id="TIPO_FORM" name="TIPO_FORM" value="0">
                         <div class="input-box">
                             <label for="CPF">CPF/CNPJ</label>
                             <input id="CPF" name="CPF" type="text" placeholder="000.000.000-00" required>
