@@ -64,19 +64,19 @@
 
                     <div class="home-buttons" style="margin-top: 10px; flex-direction: row-reverse;">
                         <a href="#projetos" class="btn btn-secondary">Tabela de damandas</a>
-                        <a href="#projetos" class="btn btn-secondary">Cirar demanda</a>
+                        <a id="btnCriarDemandas" class="btn btn-secondary">Cirar demanda</a>
                     </div>
                 </div>
                 
             </div>
         </section>
 
-        <section id="educacao" class="educacao">
+        <section id="criarDemandas" class="educacao">
             <div class="container">
                 <h2 class="section-title">Crie a Demanda</h2>
                 <div class="educacao-grid">
                     <div class="form-item">
-                        <form id="formCreate">
+                        <form id="formCreateTask">
                             <div class="input-box">
                                 <label for="EMPRESA">Tipo de pessoa</label>
                                 <select name="EMPRESA" id="EMPRESA" required>
@@ -88,12 +88,16 @@
                                 </select>
                             </div>
                             <div class="input-box">
+                                <label for="NOME_CHAMADO">Nome do chamado</label>
+                                <input id="NOME_CHAMADO" name="NOME_CHAMADO" type="text" required>
+                            </div>
+                            <div class="input-box">
                                 <label for="TITULO">Titulo do chamdo</label>
                                 <input id="TITULO" name="TITULO" type="text" required>
                             </div>
                             <div class="input-box">
                                 <label for="DESCRICAO">Descrição do chamado</label>
-                                <textarea name="DESCRICAO" id="DESCRICAO" rows="5" cols="33" required></textarea>
+                                <textarea name="DESCRICAO" id=" " rows="5" cols="33" required></textarea>
                             </div>
                             <button style="border: 0px;" type="submit" class="curso-badge">Criar Chamado</button>
                         </form>
@@ -105,6 +109,42 @@
             $(document).ready(function() {
                 $('#logoutAction').on('click', function() {
                     window.location.href = '<?= url('/logout-action')?>';
+                });
+                
+                $('#criarDemandas').hide();             
+                $('#btnCriarDemandas').on('click', function() {
+                    $('#criarDemandas').show();
+                    $('#btnCriarDemandas').attr('href', '#criarDemandas');
+                });
+            });
+
+            jQuery(document).ready(function($) {
+                $('#formCreateTask').on('submit', function(e) {
+                    e.preventDefault();
+
+                    let dadosFormulario = $(this).serialize();
+                    //console.log(dadosFormulario);
+                    //debugger;
+                    $.ajax({
+                        url: '<?= url('/criar-task-action') ?>',
+                        type: 'POST',
+                        data: dadosFormulario,
+                        dataType: 'json',
+                        success: function(resposta) {
+                            if (resposta.status === 'sucesso') {
+                                //window.location.href = '<?= url('/painel') ?>';
+                            } else {
+                                alert('Erro: ' + resposta.mensagem);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            alert('Erro de comunicação com o servidor.');
+                            console.log('Status do Erro:', xhr.status);
+                            console.log('Texto do Status:', status);
+                            console.log('Erro Lançado:', error);
+                            console.log('Resposta do Servidor:', xhr.responseText);
+                        }
+                    });
                 });
             });
         </script>

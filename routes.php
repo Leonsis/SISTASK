@@ -41,4 +41,9 @@ return [
         'method' => 'logoutAction'
     ],
 
+    '/criar-task-action' => [
+        'controller' => 'TasksController',
+        'method' => 'criarTaskAction'
+    ],
+
 ];

@@ -32,7 +32,6 @@ class LoginController extends Controller {
         ]);
     }
     
-    /* lógica de criar login */
     public function criarLoginAction() 
     {
         $pDados = isset($_POST) ? $_POST : [];
