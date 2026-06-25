@@ -32,7 +32,7 @@
                 <div>
                     <div class="curso-item">
                         <div class="curso-header">
-                            <h3>Demandas</h3>
+                            <h3>Ultimas Demandas</h3>
                         </div>
                         <table class="demandas ">
                             <thead>
@@ -44,19 +44,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="dm">PF-52445</td>
-                                    <td class="em">WTR SISTEMAS</td>
-                                    <td class="ac">
-                                        <button class="btn btn-sm btn-primary">Visualizar</button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="dm">PF-52445</td>
-                                    <td class="em">CNA</td>
-                                    <td class="ac">
-                                        <button class="btn btn-sm btn-primary">Visualizar</button>    
-                                    </td>
+                                    <?php foreach($demandas as $demanda): ?>
+                                        <td class="dm"><?= $demanda['NOME_CHAMADO']?></td>
+                                        <td class="em"><?= $demanda['NOME_FANTASIA']?></td>
+                                        <td class="ac">
+                                            <button class="btn btn-sm btn-primary">Visualizar</button>
+                                        </td>
+                                    <?php endforeach; ?>
                                 </tr>
                             </tbody>
                         </table>
@@ -78,14 +72,15 @@
                     <div class="form-item">
                         <form id="formCreateTask">
                             <div class="input-box">
-                                <label for="EMPRESA">Tipo de pessoa</label>
+                                <label for="EMPRESA">Empresa no qual solicitou o chamado</label>
                                 <select name="EMPRESA" id="EMPRESA" required>
-                                    <?php foreach ($empresas as $empresa): ?>
+                                    <?php foreach($empresas as $empresa): ?>
                                         <option value="<?= $empresa['ID'] ?>">
                                             <?= htmlspecialchars($empresa['NOME_FANTASIA']) ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
+                                <p class="toggle-link" style="margin: 0px; !important">Sua empresa está <a href="<?= url('/cadastro-empresa')?>">cadastrada</a>?</p>
                             </div>
                             <div class="input-box">
                                 <label for="NOME_CHAMADO">Nome do chamado</label>

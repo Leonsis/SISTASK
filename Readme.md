@@ -20,8 +20,6 @@ SISTASKS/
 │   │   ├── Conexao.php
 │   │   └── script.sql
 │   ├── Controllers/
-│   │   ├── EmpresaController.php
-│   │   └── LoginController.php
 │   ├── Core/
 │   │   ├── Controller.php
 │   │   └── Router.php
@@ -29,8 +27,6 @@ SISTASKS/
 │       └── helpers.php
 ├── public/
 │   ├── bootstrap-5.3.8/
-│   │   ├── css/
-│   │   └── js/
 │   ├── imges/
 │   ├── index.php
 │   ├── jquery-3.7.1.min.js

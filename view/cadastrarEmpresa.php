@@ -1,3 +1,8 @@
+<?php
+    // Pega a url no qual o usuario veio.
+    $url = $_SERVER['HTTP_REFERER'] ?? null;
+    $ultimaParte = basename($url);
+?>
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
 <head>
@@ -47,7 +52,7 @@
                         </div>
                         <button style="border: 0px;" type="submit" class="curso-badge">Criar conta</button>
                     </form>
-                    <p class="toggle-link">Empresa já cadastrada? <a href="<?= url('/criar-conta') ?>">Voltar</a></p>
+                    <p class="toggle-link">Empresa já cadastrada? <a href="<?= (($ultimaParte == 'painel') ? url('/painel') : url('/criar-conta'))?>">Voltar</a></p>
                 </div>
             </div>
         </div>
