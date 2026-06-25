@@ -1,6 +1,6 @@
 <?php
     // Pega a url no qual o usuario veio.
-    $url = $_SERVER['HTTP_REFERER'] ?? null;
+    $url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
     $ultimaParte = basename($url);
 ?>
 <!DOCTYPE html>
@@ -61,6 +61,23 @@
     <script>
         $(document).ready(function() {
             $('#CNPJ').mask('AA.AAA.AAA/AAAA-AA');
+            $('#CNPJ').on('blur', function() {
+                //API CNPJ
+                var cnpj = $('#CNPJ').val();
+                var urlAPI = "https://minhareceita.org/" + cnpj;
+                console.log(urlAPI);
+                fetch(urlAPI)
+                    .then(function(response) { 
+                        response.json()
+                    })
+                    .then(function(data) {
+                        console.log(data);
+                    })
+                    .catch(function(error) {
+                        console.error(error);
+                        alert('CNPJ invalido.');
+                    });
+            });
         });
 
         jQuery(document).ready(function($) {
