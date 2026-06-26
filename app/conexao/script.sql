@@ -1,7 +1,9 @@
 CREATE DATABASE SisTasks;
-USE SisTasks;
+USE SisTasks; 
 
-SELECT * FROM USERS 
+DROP TABLE IF EXISTS TASKS;
+DROP TABLE IF EXISTS USERS;
+DROP TABLE IF EXISTS EMPRESA;
 
 CREATE TABLE EMPRESA (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,6 +20,7 @@ CREATE TABLE USERS (
     NOME VARCHAR(100) NOT NULL,
     EMPRESA_ID INT NOT NULL,
     FOREIGN KEY (EMPRESA_ID) REFERENCES EMPRESA(ID),
+    TIP_USUARIO TINYINT NOT NULL DEFAULT 1, -- 1 - Usuario Responsavel pelo chamado | 0 - Usuario que solicita o chamado
     CPF VARCHAR(11) NOT NULL UNIQUE, -- UNIQUE para garantir que não haja duplicidade de CPF
     TELEFONE VARCHAR(20) NOT NULL,
     EMAIL VARCHAR(100) NOT NULL,
@@ -27,6 +30,9 @@ CREATE TABLE USERS (
 );
 
 /* 
+ * O TIP_USUARIO define se o usurio é responsavel por reslver o chamado ou por solicitar o chamado. 
+ * O usuario que for responsavel pode ver os chamados de todas as empresas no qual foi relacionado e criar chamados.
+ * 
  * Se uma Empresa e desativada, então todos os usuarios relacionados a quela empresa tambem serão
  * 
  * Todo usuario é uma pessoa fisica, que é relacionada a uma empresa.
@@ -34,10 +40,12 @@ CREATE TABLE USERS (
 
 CREATE TABLE TASKS (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    EMPRESA_ID INT NOT NULL,
-    FOREIGN KEY (EMPRESA_ID) REFERENCES EMPRESA(ID),
-    USER_ID INT NOT NULL,
-    FOREIGN KEY (USER_ID) REFERENCES USERS(ID),
+    EMPRESA_SOLICI_ID INT NOT NULL,
+    FOREIGN KEY (EMPRESA_SOLICI_ID) REFERENCES EMPRESA(ID),
+    USER_SOLICI_ID INT NOT NULL,
+    FOREIGN KEY (USER_SOLICI_ID) REFERENCES USERS(ID),
+    USER_RESPO_ID INT NOT NULL,
+    FOREIGN KEY (USER_RESPO_ID) REFERENCES USERS(ID),
     NOME_CHAMADO VARCHAR(200) NOT NULL UNIQUE,
     TITULO VARCHAR(200) NOT NULL,
     DESCRICAO VARCHAR(5000) NULL,
@@ -45,7 +53,7 @@ CREATE TABLE TASKS (
     DATA_CRIACAO DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     DATA_INICIO DATETIME NULL,
     DATA_ENTREGA DATETIME NULL,
-    STATUS INT NOT NULL DEFAULT 1-- 0 - Cancelado | 1 - Não iniciado | 2 - iniciado | 3 - Finalizado
+    STATUS INT NOT NULL DEFAULT 1 -- 0 - Cancelado | 1 - Não iniciado | 2 - iniciado | 3 - Finalizado
 );
 
 /*

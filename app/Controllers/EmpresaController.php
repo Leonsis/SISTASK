@@ -44,14 +44,14 @@ class EmpresaController extends Controller{
 
             $stmt = $this->pdo->prepare($sql);
 
-            $stmt->execute([
+            $resultado = $stmt->execute([
                 ':CNPJ'          => $pDados['CNPJ'],
                 ':RAZAO_SOCIAL'  => $pDados['RAZAO_SOCIAL'],
                 ':NOME_FANTASIA' => $pDados['NOME_FANTASIA'],
                 ':DATA_ABERTURA' => $pDados['DATA_ABERTURA']
             ]);
 
-            if ($stmt->execute($dados)) {
+            if ($resultado) {
                 echo json_encode(['status' => 'sucesso', 'mensagem' => 'Dados salvos com sucesso!']);
             } else {
                 echo json_encode(['status' => 'erro', 'mensagem' => 'Falha ao salvar os dados.']);

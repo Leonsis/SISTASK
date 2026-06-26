@@ -26,34 +26,40 @@
         <section id="home" class="home">
             <div class="home-container">
                 <div class="home-content">
-                    <h1 class="home-title">Bem vindo ao  <span class="highlight">SISTESk</span></h1>
+                    <h1 class="home-title">Bem vindo ao  <span class="highlight">SISTESKS</span></h1>
                     <p class="home-subtitle">Seu sistema de controle de damandas</p>                
                 </div>
                 <div>
                     <div class="curso-item">
-                        <div class="curso-header">
-                            <h3>Ultimas Demandas</h3>
+                        <div class="curso-header" <?= (!$demandas) ? 'style="justify-content: center !important;"' : '';?>>
+                            <h3>
+                                <?= ($demandas) ? 'Ultimas Demandas' : 'Você está sem demandas';?>
+                            </h3>
                         </div>
-                        <table class="demandas ">
-                            <thead>
-                                <tr>                                    
-                                    <th class="dm">Demanda</th>
-                                    <th class="em">Empresa</th>                                    
-                                    <th class="ac">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
+                        <?php if($demandas): ?>
+                            <table class="demandas ">
+                                <thead>
+                                    <tr>                                    
+                                        <th class="dm">Demanda</th>
+                                        <th class="em">Status</th>                                    
+                                        <th class="em">Empresa</th>                                    
+                                        <th class="ac">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                    
                                     <?php foreach($demandas as $demanda): ?>
-                                        <td class="dm"><?= $demanda['NOME_CHAMADO']?></td>
-                                        <td class="em"><?= $demanda['NOME_FANTASIA']?></td>
-                                        <td class="ac">
-                                            <button class="btn btn-sm btn-primary">Visualizar</button>
-                                        </td>
+                                        <tr>
+                                            <td class="dm"><?= $demanda['NOME_CHAMADO']?></td>
+                                            <td class="em"><?= $demanda['STATUS']?></td>
+                                            <td class="em"><?= $demanda['NOME_FANTASIA']?></td>
+                                            <td class="ac">
+                                                <button class="btn btn-sm btn-primary">Visualizar</button>
+                                            </td>
+                                        </tr>
                                     <?php endforeach; ?>
-                                </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        <?php endif; ?>
                     </div>
 
                     <div class="home-buttons" style="margin-top: 10px; flex-direction: row-reverse;">
@@ -81,6 +87,16 @@
                                     <?php endforeach; ?>
                                 </select>
                                 <p class="toggle-link" style="margin: 0px; !important">Sua empresa está <a href="<?= url('/cadastro-empresa')?>">cadastrada</a>?</p>
+                            </div>
+                            <div class="input-box">
+                                <label for="USUARIO_RESPO">Responsavel pelo chamado</label>
+                                <select name="USUARIO_RESPO" id="USUARIO_RESPO" required>
+                                    <?php foreach($usuarios as $usuario): ?>
+                                        <option value="<?= $usuario['ID'] ?>">
+                                            <?= htmlspecialchars($usuario['NOME']) . ' | ' . htmlspecialchars($usuario['NOME_FANTASIA'])?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="input-box">
                                 <label for="NOME_CHAMADO">Nome do chamado</label>
@@ -118,18 +134,18 @@
                     e.preventDefault();
 
                     let dadosFormulario = $(this).serialize();
-                    //console.log(dadosFormulario);
-                    //debugger;
                     $.ajax({
                         url: '<?= url('/criar-task-action') ?>',
                         type: 'POST',
                         data: dadosFormulario,
                         dataType: 'json',
-                        success: function(resposta) {
+                        success: function(resposta) {                            
                             if (resposta.status === 'sucesso') {
-                                //window.location.href = '<?= url('/painel') ?>';
+                                alert('Chamado Criado');
+                                window.location.href = '<?= url('/painel') ?>';
                             } else {
                                 alert('Erro: ' + resposta.mensagem);
+                                window.location.href = '<?= url('/painel') ?>';
                             }
                         },
                         error: function(xhr, status, error) {

@@ -61,21 +61,33 @@
     <script>
         $(document).ready(function() {
             $('#CNPJ').mask('AA.AAA.AAA/AAAA-AA');
-            $('#CNPJ').on('blur', function() {
-                //API CNPJ
+            
+            // API CNPJ
+            $('#CNPJ').on('blur', function() {                
                 var cnpj = $('#CNPJ').val();
-                var urlAPI = "https://minhareceita.org/" + cnpj;
-                console.log(urlAPI);
-                fetch(urlAPI)
-                    .then(function(response) { 
-                        response.json()
+                
+                if(!cnpj) {
+                    return;
+                }
+
+                fetch("https://minhareceita.org/" + cnpj)
+                    .then(function(response) {
+
+                        if (response.status !== 200) {
+                            alert('CNPJ inválido.');
+                            return Promise.reject('CNPJ inválido');
+                        }
+
+                        return response.json();
                     })
                     .then(function(data) {
                         console.log(data);
+                        $('#RAZAO_SOCIAL').val(data.razao_social);
+                        $('#NOME_FANTASIA').val(data.nome_fantasia);
+                        $('#DATA_ABERTURA').val(data.data_inicio_atividade);
                     })
                     .catch(function(error) {
                         console.error(error);
-                        alert('CNPJ invalido.');
                     });
             });
         });
@@ -93,11 +105,11 @@
                     dataType: 'json',
                     success: function(resposta) {
                         if (resposta.status === 'sucesso') {
-                            alert(resposta.mensagem);
-                            window.location.href = '<?= url('/criar-conta') ?>';
+                            alert('Empresa Cadastrada');
+                            window.location.href = '<?= (($ultimaParte == 'painel') ? url('/painel') : url('/criar-conta')) ?>';
                         } else {
                             alert('Erro: ' + resposta.mensagem);
-                            window.location.href = '<?= url('/criar-conta') ?>';
+                            window.location.href = '<?= (($ultimaParte == 'painel') ? url('/painel') : url('/criar-conta')) ?>';
                         }
                     },
                     error: function(xhr, status, error) {

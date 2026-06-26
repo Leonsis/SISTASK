@@ -23,28 +23,48 @@ class PainelController extends Controller {
         }
 
         $empresas = [];
-
         $sql = "SELECT ID, NOME_FANTASIA FROM EMPRESA";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $empresas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $demandas = [];
-
         $sql = "SELECT 
                     T.ID,
                     T.NOME_CHAMADO,
-                    E.NOME_FANTASIA
+                    E.NOME_FANTASIA,
+                    CASE T.STATUS
+                        WHEN 0 THEN 'Cancelado'
+                        WHEN 1 THEN 'Não iniciado'
+                        WHEN 2 THEN 'iniciado'
+                        ELSE 'Finalizado'
+                    END AS STATUS
                 FROM 
                     TASKS T, 
-                    EMPRESA E";
+                    EMPRESA E
+                WHERE 
+                    T.EMPRESA_SOLICI_ID = E.ID";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $demandas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
+        $usuarios = [];
+        $sql = "SELECT 
+                    U.ID, 
+                    U.NOME,
+                    E.NOME_FANTASIA 
+                FROM 
+                    USERS U,
+                    EMPRESA E
+                WHERE U.EMPRESA_ID = E.ID";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $this->view('painel', [
             'empresas' => $empresas,
-            'demandas' => $demandas
+            'demandas' => $demandas,
+            'usuarios' => $usuarios
         ]);
     }
 

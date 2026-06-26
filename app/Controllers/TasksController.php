@@ -45,33 +45,34 @@ class TasksController extends Controller {
 
         try {
             
-            $sql = "SELECT * FROM TASKS WHERE NOME_CHAMADO = :NOME_CHAMADO AND EMPRESA_ID = :EMPRESA_ID";
+            $sql = "SELECT * FROM TASKS WHERE NOME_CHAMADO = :NOME_CHAMADO AND EMPRESA_SOLICI_ID = :EMPRESA_SOLICI_ID";
             $stmt = $this->pdo->prepare($sql);
             
             $stmt->execute([
-                ':NOME_CHAMADO' => $pDados['NOME_CHAMADO'],
-                ':EMPRESA_ID'   => $pDados['EMPRESA']
+                ':NOME_CHAMADO'        => $pDados['NOME_CHAMADO'],
+                ':EMPRESA_SOLICI_ID'   => $pDados['EMPRESA']
             ]);
 
             $task = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($task) {
-                echo json_encode(['status' => 'erro', 'mensagem' => 'Trefa á foi criada']);
+                echo json_encode(['status' => 'erro', 'mensagem' => 'Trefa já foi criada']);
                 exit;
             }
-            
-            $sql2 = "INSERT INTO TASKS (USER_ID, EMPRESA_ID, NOME_CHAMADO, TITULO, DESCRICAO) 
-                    VALUES (:USER_ID, :EMPRESA_ID, :NOME_CHAMADO, :TITULO, :DESCRICAO)";
-            $stmt = $this->pdo->prepare($sql2);
-            $dados = [
-                'USER_ID'           => $_SESSION['usuario_id'],
-                ':EMPRESA_ID'       => $pDados['EMPRESA'],
-                ':NOME_CHAMADO'     => $pDados['NOME_CHAMADO'],
-                ':TITULO'           => $pDados['TITULO'],                
-                ':DESCRICAO'        => $pDados['DESCRICAO'],
-            ];
 
-            if ($stmt->execute($dados)) {
+            $sql = "INSERT INTO TASKS (EMPRESA_SOLICI_ID, USER_SOLICI_ID, USER_RESPO_ID, NOME_CHAMADO, TITULO, DESCRICAO) 
+                    VALUES (:EMPRESA_SOLICI_ID, :USER_SOLICI_ID, :USER_RESPO_ID, :NOME_CHAMADO, :TITULO, :DESCRICAO)";
+            $stmt = $this->pdo->prepare($sql);
+            $resultado = $stmt->execute([
+                ':EMPRESA_SOLICI_ID'    => $pDados['EMPRESA'],
+                ':USER_SOLICI_ID'       => (int) $_SESSION['usuario_id'],
+                ':USER_RESPO_ID'        => $pDados['USUARIO_RESPO'], 
+                ':NOME_CHAMADO'         => $pDados['NOME_CHAMADO'],
+                ':TITULO'               => $pDados['TITULO'],
+                ':DESCRICAO'            => $pDados['DESCRICAO'],
+            ]);
+
+            if ($resultado) {
                 echo json_encode(['status' => 'sucesso', 'mensagem' => 'Dados salvos com sucesso!']);
             } else {
                 echo json_encode(['status' => 'erro', 'mensagem' => 'Falha ao salvar os dados.']);
