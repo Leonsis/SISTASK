@@ -83,4 +83,21 @@ class TasksController extends Controller {
         }
     }
 
+    public function deletarTaskAction() {
+        $pDados = isset($_POST) ? $_POST : [];
+        
+        try {
+            $sql = "DELETE FROM TASKS WHERE ID = :ID";
+            $stmt = $this->pdo->prepare($sql);
+            
+            $stmt->execute([
+                ':ID' => (int) $pDados['ID']
+            ]);
+            
+            header('Location: ' . url('/painel'));
+        } 
+        catch (PDOException $e) {
+            echo json_encode(['status' => 'erro', 'mensagem' => 'Erro ao deletar: ' . $e->getMessage()]);
+        }
+    }
 }

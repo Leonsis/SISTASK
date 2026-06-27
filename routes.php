@@ -46,4 +46,9 @@ return [
         'method' => 'criarTaskAction'
     ],
 
+    '/deletar-task-action' => [
+        'controller' => 'TasksController',
+        'method' => 'deletarTaskAction'
+    ],
+
 ];

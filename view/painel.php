@@ -49,7 +49,7 @@
                                 </thead>
                                 <tbody>                                    
                                     <?php foreach(array_slice($demandas, 0, 4) as $demanda): ?>
-                                        <tr>
+                                        <tr <?= (count($demandas) > 1) ? 'style="box-shadow: inset 0 -1px 0 #f5b64569;"' : '' ?>>
                                             <td class="dm"><?= $demanda['NOME_CHAMADO']?></td>
                                             <td class="st"><?= $demanda['STATUS']?></td>
                                             <td class="em"><?= $demanda['NOME_FANTASIA']?></td>
@@ -136,14 +136,25 @@
                                 </thead>
                                 <tbody>                                    
                                     <?php foreach($demandas as $demanda): ?>
-                                        <tr style="border-bottom: 1px solid;">
+                                        <tr <?= (count($demandas) > 1) ? 'style="box-shadow: inset 0 -1px 0 #f5b64569;"' : '' ?>>
                                             <td class="dm"><?= $demanda['NOME_CHAMADO']?></td>                                            
                                             <td class="em"><?= $demanda['NOME_FANTASIA']?></td>
                                             <td class="st"><?= $demanda['STATUS']?></td>
                                             <td class="dt"><?= $demanda['DATA_CRIACAO']?></td>
                                             <td class="ac">
-                                                <button class="btn btn-sm btn-primary">Visualizar</button>
-                                                <button class="btn btn-sm btn-primary">Deletar</button>
+                                                 <!-- Visualizar -->
+                                                <form method="GET" action="" style="display:inline;">
+                                                    <input type="hidden" name="id" value="<?= $demanda['ID'] ?>">
+                                                    <button class="btn btn-sm btn-primary">Visualizar</button>
+                                                </form>
+
+                                                <!-- Deletar -->
+                                                <form method="POST" action="<?= url('/deletar-task-action')?>" style="display:inline;">
+                                                    <input type="hidden" name="ID" value="<?= $demanda['ID'] ?>">
+                                                    <button class="btn btn-sm btn-primary" onclick="return confirm('Deseja realmente deletar?')">
+                                                        Deletar
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
