@@ -38,7 +38,8 @@ class PainelController extends Controller {
                         WHEN 1 THEN 'Não iniciado'
                         WHEN 2 THEN 'iniciado'
                         ELSE 'Finalizado'
-                    END AS STATUS
+                    END AS STATUS,
+                    DATE(T.DATA_CRIACAO) AS DATA_CRIACAO
                 FROM 
                     TASKS T, 
                     EMPRESA E

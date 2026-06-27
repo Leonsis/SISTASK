@@ -5,11 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SISTASKS Login</title>
         <link rel="stylesheet" href="/SisTasks/public/styles.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <script src="/SisTasks/public/jQuery.js"></script>
         <script src="/SisTasks/public/jquery.mask.min.js"></script>
         <script src="/SisTasks/public/script.js"></script>
     </head>
-    <body>
+    <body id="painel">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
@@ -41,16 +42,16 @@
                                 <thead>
                                     <tr>                                    
                                         <th class="dm">Demanda</th>
-                                        <th class="em">Status</th>                                    
+                                        <th class="st">Status</th>                                    
                                         <th class="em">Empresa</th>                                    
                                         <th class="ac">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>                                    
-                                    <?php foreach($demandas as $demanda): ?>
+                                    <?php foreach(array_slice($demandas, 0, 4) as $demanda): ?>
                                         <tr>
                                             <td class="dm"><?= $demanda['NOME_CHAMADO']?></td>
-                                            <td class="em"><?= $demanda['STATUS']?></td>
+                                            <td class="st"><?= $demanda['STATUS']?></td>
                                             <td class="em"><?= $demanda['NOME_FANTASIA']?></td>
                                             <td class="ac">
                                                 <button class="btn btn-sm btn-primary">Visualizar</button>
@@ -63,7 +64,7 @@
                     </div>
 
                     <div class="home-buttons" style="margin-top: 10px; flex-direction: row-reverse;">
-                        <a href="#projetos" class="btn btn-secondary">Tabela de damandas</a>
+                        <a id="btnTabelaDemandas" class="btn btn-secondary">Tabela de damandas</a>
                         <a id="btnCriarDemandas" class="btn btn-secondary">Cirar demanda</a>
                     </div>
                 </div>
@@ -116,6 +117,43 @@
                 </div>
             </div>
         </section>
+
+        <section id="tabelaDemandas" class="educacao">
+            <div class="container">
+                <h2 class="section-title">Tabela de Demandas</h2>
+                <div class="educacao-grid">
+                    <div class="table-container">
+                        <?php if($demandas): ?>
+                            <table class="demandas">
+                                <thead>
+                                    <tr>                                    
+                                        <th class="dm">Demanda</th>
+                                        <th class="em">Empresa</th>
+                                        <th class="st">Status</th>
+                                        <th class="dt">Data de Criação</th>
+                                        <th class="ac">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>                                    
+                                    <?php foreach($demandas as $demanda): ?>
+                                        <tr style="border-bottom: 1px solid;">
+                                            <td class="dm"><?= $demanda['NOME_CHAMADO']?></td>                                            
+                                            <td class="em"><?= $demanda['NOME_FANTASIA']?></td>
+                                            <td class="st"><?= $demanda['STATUS']?></td>
+                                            <td class="dt"><?= $demanda['DATA_CRIACAO']?></td>
+                                            <td class="ac">
+                                                <button class="btn btn-sm btn-primary">Visualizar</button>
+                                                <button class="btn btn-sm btn-primary">Deletar</button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </section>
         <script>
             $(document).ready(function() {
                 $('#logoutAction').on('click', function() {
@@ -125,7 +163,15 @@
                 $('#criarDemandas').hide();             
                 $('#btnCriarDemandas').on('click', function() {
                     $('#criarDemandas').show();
+                    $('#tabelaDemandas').hide();
                     $('#btnCriarDemandas').attr('href', '#criarDemandas');
+                });
+
+                $('#tabelaDemandas').hide();             
+                $('#btnTabelaDemandas').on('click', function() {
+                    $('#tabelaDemandas').show();
+                    $('#criarDemandas').hide();
+                    $('#btnTabelaDemandas').attr('href', '#tabelaDemandas');
                 });
             });
 

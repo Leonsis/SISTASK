@@ -86,7 +86,7 @@ $(document).ready(function () {
             $(this).css('transform', 'translateY(0) scale(1)');
         });
 
-    /* Logica para criar um botton que faz subir a pagina
+    //Logica para criar um botton que faz subir a pagina
     const $backToTop = $('<button/>', {
         class: 'back-to-top',
         html: '<i class="fas fa-arrow-up"></i>'
@@ -108,7 +108,7 @@ $(document).ready(function () {
         zIndex: 1000
     });
 
-    $('body').append($backToTop);
+    $('#painel').append($backToTop);
 
     $(window).on('scroll', function () {
         if ($(this).scrollTop() > 300) {
@@ -134,33 +134,6 @@ $(document).ready(function () {
                 transform: 'scale(1)',
                 backgroundColor: '#f5b645'
             });
-        });*/
-
-    // Função que ajusta o campo CPF/CNPJ
-    /* var opcoesCpfCnpj = {
-        onKeyPress: function(val, e, field, options) {
-            // Remove toda a formatação para contar apenas os números puros
-            var numeros = val.replace(/\D/g, '');
-            
-            // Se digitou mais de 11 números, muda para CNPJ. Senão, mantém CPF.
-            // O '##' no final do CPF permite que o usuário digite o 12º número para disparar a troca
-            var novaMascara = (numeros.length > 11) ? '00.000.000/0000-00' : '000.000.000-00##';
-            
-            // 3. Aplica a nova máscara dinamicamente
-            $('#CPF_CNPJ').mask(novaMascara, options);
-        }
-    };
-
-    // Inicializa o campo aceitando até 14 números puros (padrão inicial CPF)
-    $('#CPF_CNPJ').mask('000.000.000-00##', opcoesCpfCnpj);
-    $('#CPF_CNPJ').mask('000.000.000-00##', opcoesCpfCnpj);
+        });
     
-    $('#CPF_CNPJ').blur(function() {
-        if ($(this).val().length <= 14) {
-            $('#PESSOA_FISICA_JURIDICA').val('0');
-        }
-        else {
-            $('#PESSOA_FISICA_JURIDICA').val('1');
-        }
-    }); */   
 });
