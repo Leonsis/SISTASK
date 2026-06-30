@@ -11,7 +11,7 @@ class TasksController extends Controller {
         $this->pdo = $pdo;
     }
 
-    public function viewPainel()
+    public function viewTask()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -22,16 +22,42 @@ class TasksController extends Controller {
             exit;
         }
 
-        $empresas = [];
+        $pDados = isset($_GET) ? $_GET : [];
 
-        $sql = "SELECT ID, NOME_FANTASIA FROM EMPRESA";
-
+        $sql = "SELECT
+                    T.ID,
+                    T.NOME_CHAMADO,
+                    T.TITULO,
+                    T.DESCRICAO,
+                    T.DETALHES,
+                    T.DATA_CRIACAO,
+                    T.DATA_INICIO,
+                    T.DATA_ENTREGA,
+                    CASE T.STATUS
+                        WHEN 0 THEN 'Cancelado'
+                        WHEN 1 THEN 'Não iniciado'
+                        WHEN 2 THEN 'Iniciado'
+                        ELSE 'Finalizado'
+                    END AS STATUS,
+                    E.NOME_FANTASIA AS EMPRESA,
+                    US.NOME AS USUARIO_SOLICITANTE,
+                    UR.NOME AS USUARIO_RESPONSAVEL
+                FROM TASKS T
+                INNER JOIN EMPRESA E
+                    ON T.EMPRESA_SOLICI_ID = E.ID
+                INNER JOIN USERS US
+                    ON T.USER_SOLICI_ID = US.ID
+                INNER JOIN USERS UR
+                    ON T.USER_RESPO_ID = UR.ID
+                WHERE T.ID = :ID";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        $empresas = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+        $stmt->execute([
+            ':ID' => (int) $pDados['ID']
+        ]);
+        $task = $stmt->fetchAll(PDO::FETCH_ASSOC); 
         
-        $this->view('painel', [
-            'empresas' => $empresas
+        $this->view('task', [
+            'task' => $task
         ]);
     }
 
@@ -53,9 +79,9 @@ class TasksController extends Controller {
                 ':EMPRESA_SOLICI_ID'   => $pDados['EMPRESA']
             ]);
 
-            $task = $stmt->fetch(PDO::FETCH_ASSOC);
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($task) {
+            if ($resultado) {
                 echo json_encode(['status' => 'erro', 'mensagem' => 'Trefa já foi criada']);
                 exit;
             }

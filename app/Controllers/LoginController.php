@@ -54,9 +54,9 @@ class LoginController extends Controller {
                 exit;
             }
 
-            $sql2 = "INSERT INTO USERS (NOME, EMPRESA_ID, CPF, PASSWORD, TELEFONE, EMAIL) 
+            $sql = "INSERT INTO USERS (NOME, EMPRESA_ID, CPF, PASSWORD, TELEFONE, EMAIL) 
                     VALUES (:NOME, :EMPRESA, :CPF, :PASSWORD, :TELEFONE, :EMAIL)";
-            $stmt = $this->pdo->prepare($sql2);
+            $stmt = $this->pdo->prepare($sql);
             
             // Gera o hash da senha
             $hash = password_hash($pDados['PASSWORD'], PASSWORD_DEFAULT); 
@@ -89,7 +89,7 @@ class LoginController extends Controller {
         }
 
         $cpf = isset($pDados['CPF']) ? trim($pDados['CPF']) : '';
-        $senha   = isset($pDados['PASSWORD']) ? trim($pDados['PASSWORD']) : '';
+        $senha = isset($pDados['PASSWORD']) ? trim($pDados['PASSWORD']) : '';
 
         if (empty($cpf) || empty($senha)) {
             $_SESSION['erro_login'] = "Preencha todos os campos.";

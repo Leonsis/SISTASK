@@ -143,8 +143,8 @@
                                             <td class="dt"><?= $demanda['DATA_CRIACAO']?></td>
                                             <td class="ac">
                                                  <!-- Visualizar -->
-                                                <form method="GET" action="" style="display:inline;">
-                                                    <input type="hidden" name="id" value="<?= $demanda['ID'] ?>">
+                                                <form method="GET" action="<?= url('/task') ?>" style="display:inline;">
+                                                    <input type="hidden" name="ID" value="<?= $demanda['ID'] ?>">
                                                     <button class="btn btn-sm btn-primary">Visualizar</button>
                                                 </form>
 

@@ -51,4 +51,9 @@ return [
         'method' => 'deletarTaskAction'
     ],
 
+    '/task' => [
+        'controller' => 'TasksController',
+        'method' => 'viewTask'
+    ],
+
 ];
