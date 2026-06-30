@@ -10,6 +10,13 @@
         <script src="/SisTasks/public/jquery.mask.min.js"></script>
         <script src="/SisTasks/public/script.js"></script>
     </head>
+    <style>
+        <?php if(count($demandas) > 1): ?>
+            table tbody tr{
+                box-shadow: 0px 1px #f5b645;
+            }
+        <?php endif; ?>
+    </style>   
     <body id="painel">
         <nav class="navbar">
             <div class="nav-container">
@@ -38,7 +45,7 @@
                             </h3>
                         </div>
                         <?php if($demandas): ?>
-                            <table class="demandas ">
+                            <table>
                                 <thead>
                                     <tr>                                    
                                         <th class="dm">Demanda</th>

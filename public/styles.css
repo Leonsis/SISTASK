@@ -1094,7 +1094,9 @@ table th.ac {width: 40%;}
 
 #tabelaDemandas .table-container {
     margin: auto;
-    width: 70%;
+    width:100%;
+    max-width:1100px;
+    margin:auto;
     background-color: rgba(245, 182, 69, 0.1);
     padding: 2rem;
     border-radius: 15px;
@@ -1120,62 +1122,17 @@ table th.ac {width: 40%;}
 #tabelaDemandas th.dt {width: 30%; text-align: center;}
 #tabelaDemandas th.ac {width: 40%;}
 
-@media (min-width: 728px) and (max-width: 1024px)  {
-    #home table .em {display: none;}
-    #home table th.em {display: none;}
-
-
-    #tabelaDemandas .dt {display: none;}    
-    #tabelaDemandas th.dt {display: none;}
-
-    #tabelaDemandas th.em {width: 30%; text-align: center;}
-    #tabelaDemandas .dm {width: 30%; text-align: center;}
-    #tabelaDemandas .st {width: 40%; text-align: center;}
-    #tabelaDemandas .ac {width: 80%;}
-
-    #tabelaDemandas th.em {width: 30%; text-align: center;}
-    #tabelaDemandas th.dm {width: 30%; text-align: center;}
-    #tabelaDemandas th.st {width: 40%; text-align: center;}
-    #tabelaDemandas th.ac {width: 80%;}
-    
+table tbody td{
+    padding-bottom: 20px;
 }
 
-@media (min-width: 440px) and (max-width: 727px)  {
-
-    #tabelaDemandas .dt {display: none;}    
-    #tabelaDemandas th.dt {display: none;}
-    #tabelaDemandas .st {display: none;}
-    #tabelaDemandas th.st {display: none;}
-
-    #tabelaDemandas .em {width: 40%; }
-    #tabelaDemandas .dm {width: 40%; }
-    #tabelaDemandas .ac {width: 100%;}
-
-    #tabelaDemandas th.em {width: 40%; }
-    #tabelaDemandas th.dm {width: 40%; }
-    #tabelaDemandas th.ac {width: 100%;}
-    
-    #tabelaDemandas .table-container {width: 100%;}
+.table-container{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
 }
 
-@media (max-width: 439px)  {
-    table .em {display: none;}
-    table th.em {display: none;}
-    table .st {display: none;}
-    table th.st {display: none;}
-
-    #tabelaDemandas .em {display: none;}
-    #tabelaDemandas .dt {display: none;}
-    #tabelaDemandas th.em {display: none;}
-    #tabelaDemandas th.dt {display: none;}
-    #tabelaDemandas th.st {display: none;}
-    #tabelaDemandas .st {display: none;}
-
-    #tabelaDemandas .table-container {width: 100%;}
-
-    #tabelaDemandas th.dm {width: 50%; }
-    #tabelaDemandas th.ac {width: 100%;}
-    
-    #tabelaDemandas .dm {width: 50%; }
-    #tabelaDemandas .ac {width: 100%;}
+.demandas{
+    min-width:700px;
+    width:100%;
+    border-collapse:collapse;
 }
