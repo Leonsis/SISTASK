@@ -41,8 +41,11 @@
                                             <td class="dm"><?= $demanda['NOME_CHAMADO']?></td>
                                             <td class="st"><?= $demanda['STATUS']?></td>
                                             <td class="em"><?= $demanda['NOME_FANTASIA']?></td>
-                                            <td class="ac">
-                                                <button class="btn btn-sm btn-primary">Visualizar</button>
+                                            <td class="ac">                                                
+                                                <form method="GET" action="<?= url('/task') ?>" style="display:inline;">
+                                                    <input type="hidden" name="ID" value="<?= $demanda['ID'] ?>">
+                                                    <button class="btn btn-sm btn-primary">Visualizar</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
