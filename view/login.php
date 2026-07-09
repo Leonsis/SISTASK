@@ -1,28 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISTASKS Login</title>
-    
-    <link rel="stylesheet" href="/SisTasks/public/styles.css">
-    <script src="/SisTasks/public/jQuery.js"></script>
-    <script src="/SisTasks/public/jquery.mask.min.js"></script>
-    <script src="/SisTasks/public/script.js"></script>
-</head>
+
+<?php include 'inc/head.php'; ?>
+
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>SISTASKS</h2>
-            </div>
-            <!-- <ul class="nav-menu">
-                <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Sobre</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Projetos</a></li>
-            </ul> -->
-        </div>
-    </nav>
+    
+    <?php include 'inc/nav.php'; ?>
 
     <section class="cursos" style="padding: 140px 0 80px 0;">
         <div class="container">

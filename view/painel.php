@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="dark">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SISTASKS Login</title>
-        <link rel="stylesheet" href="/SisTasks/public/styles.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-        <script src="/SisTasks/public/jQuery.js"></script>
-        <script src="/SisTasks/public/jquery.mask.min.js"></script>
-        <script src="/SisTasks/public/script.js"></script>
-    </head>
+    <?php include 'inc/head.php'; ?>
     <style>
         <?php if(count($demandas) > 1): ?>
             table tbody tr{
@@ -18,19 +9,9 @@
         <?php endif; ?>
     </style>   
     <body id="painel">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <h2>SISTASKS</h2>
-                </div>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <button id="logoutAction" class="btn btn-sm btn-primary">Sair</button>
-                    </li>                    
-                </ul>
-            </div>
-        </nav>
-
+        
+        <?php include 'inc/nav.php'; ?>
+        
         <section id="home" class="home">
             <div class="home-container">
                 <div class="home-content">
