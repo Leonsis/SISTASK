@@ -3,7 +3,7 @@
         <div class="nav-logo">
             <h2>SISTASKS</h2>
         </div>
-        <?php if (isset($_SESSION['user_id'])): ?>
+        <?php if (isset($_SESSION['usuario_logado'])): ?>
             <ul class="nav-menu">
                 <li class="nav-item">
                     <button id="logoutAction" class="btn btn-sm btn-primary">Sair</button>
