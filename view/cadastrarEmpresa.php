@@ -50,7 +50,7 @@
                             <label for="DATA_ABERTURA">Data de Abertura</label>
                             <input type="date" id="DATA_ABERTURA" name="DATA_ABERTURA" required>
                         </div>
-                        <button style="border: 0px;" type="submit" class="curso-badge">Criar conta</button>
+                        <button style="border: 0px;" type="submit" class="curso-badge">Cadastrar</button>
                     </form>
                     <p class="toggle-link">Empresa já cadastrada? <a href="<?= (($ultimaParte == 'painel') ? url('/painel') : url('/criar-conta'))?>">Voltar</a></p>
                 </div>

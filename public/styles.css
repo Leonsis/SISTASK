@@ -1123,7 +1123,7 @@ table th.ac {width: 40%;}
 #tabelaDemandas th.ac {width: 40%;}
 
 table tbody td{
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 
 .table-container{
@@ -1135,4 +1135,20 @@ table tbody td{
     min-width:700px;
     width:100%;
     border-collapse:collapse;
+}
+
+.task-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(1); /* deixa o ícone branco */
 }
