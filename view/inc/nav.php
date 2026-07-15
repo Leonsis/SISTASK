@@ -12,3 +12,8 @@
         <?php endif; ?>
     </div>
 </nav>
+<script>
+    $('#logoutAction').on('click', function() {
+        window.location.href = '<?= url('/logout-action')?>';
+    });
+</script>
