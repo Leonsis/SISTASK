@@ -157,11 +157,7 @@
             </div>
         </section>
         <script>
-            $(document).ready(function() {
-                $('#logoutAction').on('click', function() {
-                    window.location.href = '<?= url('/logout-action')?>';
-                });
-                
+            $(document).ready(function() {                                
                 $('#criarDemandas').hide();             
                 $('#btnCriarDemandas').on('click', function() {
                     $('#criarDemandas').show();
