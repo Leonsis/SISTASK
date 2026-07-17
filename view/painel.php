@@ -99,8 +99,9 @@
                                 <input id="TITULO" name="TITULO" type="text" required>
                             </div>
                             <div class="input-box">
-                                <label for="DESCRICAO">Descrição do chamado</label>
-                                <textarea name="DESCRICAO" id=" " rows="5" cols="33" required></textarea>
+                                <label for="DESCRICAO">Escreva os detalhes do chamado</label>
+                                <div class="editor" style="height:200px;"></div>
+                                <input type="hidden" name="DESCRICAO" id="DESCRICAOCreateTask">
                             </div>
                             <button style="border: 0px;" type="submit" class="curso-badge">Criar Chamado</button>
                         </form>
@@ -157,6 +158,25 @@
             </div>
         </section>
         <script>
+
+            const quill = new Quill('.editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ header: [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline'],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        ['link'],
+                        ['clean']
+                    ]
+                }
+            });
+            const form = document.getElementById('formCreateTask');
+
+            form.addEventListener('submit', function () {
+                document.getElementById('DESCRICAOCreateTask').value = quill.root.innerHTML;
+            });
+
             $(document).ready(function() {                                
                 $('#criarDemandas').hide();             
                 $('#btnCriarDemandas').on('click', function() {

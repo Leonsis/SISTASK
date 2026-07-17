@@ -7,4 +7,7 @@
     <script src="/SisTasks/public/jQuery.js"></script>
     <script src="/SisTasks/public/jquery.mask.min.js"></script>
     <script src="/SisTasks/public/script.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
 </head>
